@@ -149,7 +149,7 @@ end)
 
 RunTest("request", function()
 	local Response = Global.request({
-		Url = "https://raw.githubusercontent.com/HV-scripter/doors/refs/heads/main/Abysall-main/Components/Environment.luau?token=GHSAT0AAAAAAD4DDU75H6AXA4RQGIZTMZCC2SVKOKQ",
+		Url = "https://raw.githubusercontent.com/HV-scripter/doors-lib/refs/heads/main/Environment.luau",
 		Method = "GET",
 	})
 	assert(Response.StatusCode == 200, "Status code should be 200")
@@ -487,7 +487,7 @@ end)
 
 RunTest("getcustomasset", function()
 	assert(Environment.writefile, "writefile is required to test")
-	local Content = game:HttpGet("https://githubusercontent.com/HV-scripter/doors/blob/main/Abysall-main/Assets/Check.png")
+	local Content = game:HttpGet("https://githubusercontent.com/HV-scripter/doors-lib/refs/heads/main/Check.png")
 	Global.writefile("Abysall_Test_Image", Content)
 	local Asset = Global.getcustomasset("Abysall_Test_Image")
 	local TestImage = Instance.new("ImageLabel", Services.CoreGui.RobloxGui)
