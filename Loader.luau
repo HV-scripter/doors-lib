@@ -54,7 +54,6 @@ return function(Window)
     Executor:AddLabel("Test Result: ", true)
 
     for Index, Result in pairs(Abysall.Environment.Results) do
-		-- fix for veloshitty 💔
 		Result = Result:gsub("<", "(")
 		Result = Result:gsub(">", ")")
 		
