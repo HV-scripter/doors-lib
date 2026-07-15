@@ -47,15 +47,15 @@ return function(Window)
 		Default = (Abysall.UILibrary == "Linoria" and 2 or 1),
 		Callback = function(Value)
 			if Abysall.Environment.writefile and Abysall.Environment.readfile then
-				if not Abysall.Environment.isfile("HVHUB/doors/UserData.json") then
+				if not Abysall.Environment.isfile("HVHUB/UserData.json") then
 					local Data = {
 						TotalExecutions = 0,
 						UILibrary = "Obsidian"
 					}
-					Abysall.Environment.writefile("HVHUB/doors/UserData.json", Services.HttpService:JSONEncode(Data))
+					Abysall.Environment.writefile("HVHUB/UserData.json", Services.HttpService:JSONEncode(Data))
 				end
 
-				local UserData = Abysall.Environment.readfile("HVHUB/doors/UserData.json")
+				local UserData = Abysall.Environment.readfile("HVHUB/UserData.json")
 				local Decoded = Services.HttpService:JSONDecode(UserData)
 				Decoded.UILibrary = Value
 
@@ -66,7 +66,7 @@ return function(Window)
 				Abysall.TotalExecutions = Decoded.TotalExecutions
 				Abysall.UILibrary = Decoded.UILibrary
 
-				Abysall.Environment.writefile("HVHUB/doors/UserData.json", Services.HttpService:JSONEncode(Decoded))
+				Abysall.Environment.writefile("HVHUB/UserData.json", Services.HttpService:JSONEncode(Decoded))
 			end
 		end
 	})
@@ -97,8 +97,8 @@ return function(Window)
 	SaveManager:SetLibrary(Library)
 	SaveManager:IgnoreThemeSettings()
 	SaveManager:SetIgnoreIndexes({"UILibrary"})
-	ThemeManager:SetFolder("HVHUB/doors")
-	SaveManager:SetFolder("HVHUB/doors/" .. Abysall.SavePath)
+	ThemeManager:SetFolder("HVHUB")
+	SaveManager:SetFolder("HVHUB" .. Abysall.SavePath)
 	SaveManager:BuildConfigSection(SettingsTab)
 	ThemeManager:ApplyToTab(SettingsTab)
 	SaveManager:LoadAutoloadConfig()
