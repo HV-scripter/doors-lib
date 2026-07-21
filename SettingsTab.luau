@@ -102,4 +102,35 @@ return function(Window)
 	SaveManager:BuildConfigSection(SettingsTab)
 	ThemeManager:ApplyToTab(SettingsTab)
 	SaveManager:LoadAutoloadConfig()
+
+	local function SetupAutoReload()
+		if not Toggles.AutoReloadHubToggle or not Toggles.AutoReloadHubToggle.Value then 
+			return 
+		end
+		
+		local QueueTeleport = queue_on_teleport or queueonteleport or (syn and syn.queue_on_teleport)
+		if QueueTeleport then
+			QueueTeleport([==[
+				if typeof(loaders) == "function" then
+					loaders()
+				end
+			]==])
+		end
+	end
+
+	local Player = game:GetService("Players").LocalPlayer
+	Player.OnTeleport:Connect(function(State)
+		if State == Enum.TeleportState.Started then
+			SetupAutoReload()
+		end
+	end)
+
+	MenuGroup:AddToggle('AutoReloadHubToggle', {
+		Text = 'Execute on teleport',
+		Default = false,
+		Tooltip = 'executing script after teleport',
+		
+		Callback = function(Value)
+		end
+	})
 end
