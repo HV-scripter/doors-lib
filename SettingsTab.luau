@@ -91,39 +91,48 @@ return function(Window)
 		Library:Unload()
 	end)
 
-	local function SetupAutoReload()
-		if not Toggles.AutoReloadHubToggle or not Toggles.AutoReloadHubToggle.Value then 
-			return 
-		end
+	Library.ToggleKeybind = Options.MenuKeybind
+
+	if typeof(loaders) == "function" and getgenv().Abysall then
+		getgenv().Abysall.loaders = loaders()
+	end
+
+	local function UpdateTeleportQueue(IsEnabled)
+		if not IsEnabled then return end
 		
 		local QueueTeleport = queue_on_teleport or queueonteleport or (syn and syn.queue_on_teleport)
 		if QueueTeleport then
 			QueueTeleport([==[
-				if typeof(loaders) == "function" then
+				repeat task.wait() until game:IsLoaded()
+				task.wait(1.5)
+				
+				if getgenv().Abysall and typeof(getgenv().Abysall.loaders) == "function" then
+					getgenv().Abysall.loaders()
+				elseif typeof(loaders) == "function" then
 					loaders()
+				else
+					warn("[HVHUB Error]")
 				end
 			]==])
 		end
 	end
 
-	local Player = game:GetService("Players").LocalPlayer
+	local Player = Services.Players.LocalPlayer
 	Player.OnTeleport:Connect(function(State)
-		if State == Enum.TeleportState.Started then
-			SetupAutoReload()
+		if State == Enum.TeleportState.Started and Toggles.AutoReloadHubToggle and Toggles.AutoReloadHubToggle.Value then
+			UpdateTeleportQueue(true)
 		end
 	end)
 
-	MenuGroup:AddToggle('AutoReloadHubToggle', {
+	MenuGroup:AddToggle('Executeonteleporttoggle', {
 		Text = 'Execute on teleport',
 		Default = false,
-		Tooltip = 'executing script after teleport',
-		
+		Tooltip = 'Executing script after teleport',
 		Callback = function(Value)
+			UpdateTeleportQueue(Value)
 		end
 	})
 
-	Library.ToggleKeybind = Options.MenuKeybind
-	
 	ThemeManager:SetLibrary(Library)
 	SaveManager:SetLibrary(Library)
 	SaveManager:IgnoreThemeSettings()
