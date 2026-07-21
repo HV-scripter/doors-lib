@@ -90,18 +90,6 @@ return function(Window)
 	MenuGroup:AddButton("Unload", function()
 		Library:Unload()
 	end)
-	
-	Library.ToggleKeybind = Options.MenuKeybind
-	
-	ThemeManager:SetLibrary(Library)
-	SaveManager:SetLibrary(Library)
-	SaveManager:IgnoreThemeSettings()
-	SaveManager:SetIgnoreIndexes({"UILibrary"})
-	ThemeManager:SetFolder("HVHUB")
-	SaveManager:SetFolder("HVHUB/" .. Abysall.SavePath)
-	SaveManager:BuildConfigSection(SettingsTab)
-	ThemeManager:ApplyToTab(SettingsTab)
-	SaveManager:LoadAutoloadConfig()
 
 	local function SetupAutoReload()
 		if not Toggles.AutoReloadHubToggle or not Toggles.AutoReloadHubToggle.Value then 
@@ -133,4 +121,16 @@ return function(Window)
 		Callback = function(Value)
 		end
 	})
+
+	Library.ToggleKeybind = Options.MenuKeybind
+	
+	ThemeManager:SetLibrary(Library)
+	SaveManager:SetLibrary(Library)
+	SaveManager:IgnoreThemeSettings()
+	SaveManager:SetIgnoreIndexes({"UILibrary"})
+	ThemeManager:SetFolder("HVHUB")
+	SaveManager:SetFolder("HVHUB/" .. Abysall.SavePath)
+	SaveManager:BuildConfigSection(SettingsTab)
+	ThemeManager:ApplyToTab(SettingsTab)
+	SaveManager:LoadAutoloadConfig()
 end
