@@ -93,46 +93,6 @@ return function(Window)
 
 	Library.ToggleKeybind = Options.MenuKeybind
 
-	if typeof(loaders) == "function" and getgenv().Abysall then
-		getgenv().Abysall.loaders = loaders
-	end
-
-	local function UpdateTeleportQueue(IsEnabled)
-		if not IsEnabled then return end
-		
-		local QueueTeleport = queue_on_teleport or queueonteleport or (syn and syn.queue_on_teleport)
-		if QueueTeleport then
-			QueueTeleport([==[
-				repeat task.wait() until game:IsLoaded()
-				task.wait(1.5)
-				
-				if getgenv().Abysall and typeof(getgenv().Abysall.loaders) == "function" then
-					getgenv().Abysall.loaders()
-				elseif typeof(loaders) == "function" then
-					loaders()
-				else
-					warn("[HVHUB Error]")
-				end
-			]==])
-		end
-	end
-
-	local Player = Services.Players.LocalPlayer
-	Player.OnTeleport:Connect(function(State)
-		if State == Enum.TeleportState.Started and Toggles.Executeonteleporttoggle and Toggles.Executeonteleporttoggle.Value then
-			UpdateTeleportQueue(true)
-		end
-	end)
-
-	MenuGroup:AddToggle('Executeonteleporttoggle', {
-		Text = 'Execute on teleport',
-		Default = false,
-		Tooltip = 'Executing script after teleport',
-		Callback = function(Value)
-			UpdateTeleportQueue(Value)
-		end
-	})
-
 	ThemeManager:SetLibrary(Library)
 	SaveManager:SetLibrary(Library)
 	SaveManager:IgnoreThemeSettings()
