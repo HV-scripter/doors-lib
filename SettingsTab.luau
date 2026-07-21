@@ -94,7 +94,7 @@ return function(Window)
 	Library.ToggleKeybind = Options.MenuKeybind
 
 	if typeof(loaders) == "function" and getgenv().Abysall then
-		getgenv().Abysall.loaders = loaders()
+		getgenv().Abysall.loaders = loaders
 	end
 
 	local function UpdateTeleportQueue(IsEnabled)
@@ -119,7 +119,7 @@ return function(Window)
 
 	local Player = Services.Players.LocalPlayer
 	Player.OnTeleport:Connect(function(State)
-		if State == Enum.TeleportState.Started and Toggles.AutoReloadHubToggle and Toggles.AutoReloadHubToggle.Value then
+		if State == Enum.TeleportState.Started and Toggles.Executeonteleporttoggle and Toggles.Executeonteleporttoggle.Value then
 			UpdateTeleportQueue(true)
 		end
 	end)
