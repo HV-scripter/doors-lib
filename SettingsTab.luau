@@ -39,10 +39,9 @@ return function(Window)
 	})
 
 	MenuGroup:AddDropdown("UILibrary", {
-		Text = "UI Style",
+		Text = "DON'T TOUCH THAT",
 		Values = {
-			"Obsidian",
-			"Linoria"
+			"Obsidian"
 		},
 		Default = (Abysall.UILibrary == "Linoria" and 2 or 1),
 		Callback = function(Value)
