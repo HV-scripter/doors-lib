@@ -1,5 +1,4 @@
-local Library = (Abysall.UILibrary == "Linoria" and "LinoriaLib" or "Obsidian")
-local BaseUrl = "https://raw.githubusercontent.com/mstudio45/" .. Library .. "/refs/heads/main/"
+local BaseUrl = "https://raw.githubusercontent.com/deividcomsono/Obsidian/refs/heads/main"
 local HVUrl = "https://raw.githubusercontent.com/HV-scripter/doors-lib/refs/heads/main/"
 
 local Interface = {
