@@ -6,7 +6,6 @@ local Interface = {
   SaveManager = loadstring(game:HttpGet(BaseUrl .. "addons/SaveManager.lua"))(),
   ThemeManager = loadstring(game:HttpGet(BaseUrl .. "addons/ThemeManager.lua"))(),
 
-  ApplyInfoTab = loadstring(game:HttpGet(HVUrl .. "InfoTab.luau"))(),
   ApplySettingsTab = loadstring(game:HttpGet(HVUrl .. "SettingsTab.luau"))()
 }
 
