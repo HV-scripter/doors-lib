@@ -37,8 +37,10 @@ return function(Window)
     User:AddLabel("ID: " .. LocalPlayer.Name, true)
     User:AddLabel("Total Executions: " .. (Abysall.TotalExecutions and Abysall.TotalExecutions or "N/A"), true)
 
-	local ExpiryLabel = User:AddLabel("Expiry: Loading...", true)
-	ExpiryLabel:SetText("Expires at: " .. os.date("%m-%d %H:%M", JD_EXPIRES_AT))
+	if not JD_EXPIRES_AT == never then
+		local ExpiryLabel = User:AddLabel("Expiry: Loading...", true)
+		ExpiryLabel:SetText("Expires at: " .. os.date("%m-%d %H:%M", JD_EXPIRES_AT))
+	end
 
     local Name, Version = Abysall.Environment.identifyexecutor()
     local Executor = InfoTab:AddRightGroupbox("Executor Info")
