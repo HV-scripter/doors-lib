@@ -25,10 +25,6 @@ return function(Window)
 
     local User = InfoTab:AddLeftGroupbox("User Info")
 
-	local ExpiryLabel = Groupbox:AddLabel("Expiry: Loading...", true)
-
-	ExpiryLabel:SetText("Expires at: " .. os.date("%m-%d %H:%M", JD_EXPIRES_AT))
-
     local ImageSize = Enum.ThumbnailSize.Size420x420
     local ImageType = Enum.ThumbnailType.HeadShot
 
@@ -40,6 +36,9 @@ return function(Window)
 
     User:AddLabel("ID: " .. LocalPlayer.Name, true)
     User:AddLabel("Total Executions: " .. (Abysall.TotalExecutions and Abysall.TotalExecutions or "N/A"), true)
+
+	local ExpiryLabel = User:AddLabel("Expiry: Loading...", true)
+	ExpiryLabel:SetText("Expires at: " .. os.date("%m-%d %H:%M", JD_EXPIRES_AT))
 
     local Name, Version = Abysall.Environment.identifyexecutor()
     local Executor = InfoTab:AddRightGroupbox("Executor Info")
