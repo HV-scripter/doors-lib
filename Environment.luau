@@ -6,8 +6,6 @@ local Passed = 0
 
 local BrokenFeatures = {
 	["Volcano"] = {"run_on_actor", "oth"},
-	["Delta"] = {"hookmetamethod"},
-	["Wave"] = {"hookmetamethod"},
 	["Opiumware"] = {"gethiddenproperty"},
 	["Solara"] = {"require"},
 	["Xeno"] = {"require"},
